@@ -1,5 +1,6 @@
 # Sensitive data
 cfg/auth.json
+deploy.sh
 
 # Embedded data
 pkg/fontytelemetry/assets.go
