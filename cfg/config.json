@@ -1,0 +1,5 @@
+{
+  "ProjectID": "fonty-analytics",
+  "PubsubTopic": "fonty-telemetry",
+  "PubsubSubscription": "fonty-telemetry-elt"
+}

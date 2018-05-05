@@ -1,0 +1,1 @@
+go-bindata -o pkg/fontytelemetry/assets.go -pkg fontytelemetry cfg/
