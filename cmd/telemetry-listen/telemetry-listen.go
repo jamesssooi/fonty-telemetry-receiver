@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/jamesssooi/fonty-telemetry-receiver/pkg/fontytelemetry"
 	"github.com/jamesssooi/fonty-telemetry-receiver/pkg/iso8601"
@@ -31,16 +32,17 @@ func main() {
 
 // TelemetryData represents an incoming telemetry event from a fonty client.
 type TelemetryData struct {
-	IPAddress     string          `json:"ip_address"`
-	Timestamp     iso8601.ISO8601 `json:"timestamp"`
-	StatusCode    int             `json:"status_code"`
-	EventType     string          `json:"event_type"`
-	ExecutionTime float32         `json:"execution_time"`
-	FontyVersion  string          `json:"fonty_version"`
-	OSFamily      string          `json:"os_family"`
-	OSVersion     string          `json:"os_version"`
-	PythonVersion string          `json:"python_version"`
-	Data          interface{}     `json:"data"`
+	IPAddress       string          `json:"ip_address"`
+	ServerTimestamp string          `json:"server_timestamp"`
+	Timestamp       iso8601.ISO8601 `json:"timestamp"`
+	StatusCode      int             `json:"status_code"`
+	EventType       string          `json:"event_type"`
+	ExecutionTime   float32         `json:"execution_time"`
+	FontyVersion    string          `json:"fonty_version"`
+	OSFamily        string          `json:"os_family"`
+	OSVersion       string          `json:"os_version"`
+	PythonVersion   string          `json:"python_version"`
+	Data            interface{}     `json:"data"`
 }
 
 func endpointV1(w http.ResponseWriter, r *http.Request) {
@@ -51,6 +53,9 @@ func endpointV1(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("Failed to decode JSON data: %v", err)
 	}
+
+	// Add server timetamp
+	data.ServerTimestamp = time.Now().UTC().Format(time.RFC3339)
 
 	// Add IP address. Needed to process geographic area later, will be removed in
 	// the ETL pipeline before storage.
