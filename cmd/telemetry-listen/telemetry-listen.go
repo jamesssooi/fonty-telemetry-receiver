@@ -53,7 +53,11 @@ func endpointV1(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add IP address
-	data.IPAddress, _, _ = net.SplitHostPort(r.RemoteAddr)
+	ipaddr := r.Header.Get("X-Real-IP")
+	if ipaddr == "" {
+		ipaddr, _, _ = net.SplitHostPort(r.RemoteAddr)
+	}
+	data.IPAddress = ipaddr
 
 	// Recode JSON body
 	o, _ := json.Marshal(data)
