@@ -52,7 +52,8 @@ func endpointV1(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Failed to decode JSON data: %v", err)
 	}
 
-	// Add IP address
+	// Add IP address. Needed to process geographic area later, will be removed in
+	// the ETL pipeline before storage.
 	ipaddr := r.Header.Get("X-Real-IP")
 	if ipaddr == "" {
 		ipaddr, _, _ = net.SplitHostPort(r.RemoteAddr)
