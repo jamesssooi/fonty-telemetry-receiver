@@ -79,5 +79,5 @@ func endpointV1(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "{\"status\": \"ok\", \"id\": \"%v\"}", id)
 
 	// Log to stdout
-	log.Printf("%v - %v", data.IPAddress, data.EventType)
+	log.Printf("%v - %v/%v", data.EventType, fontytelemetry.Config.PubsubTopic, id)
 }
