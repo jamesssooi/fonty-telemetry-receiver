@@ -7,6 +7,7 @@ import (
 
 // Configuration is a struct describing the application's configuration.
 type Configuration struct {
+	Port               int
 	ProjectID          string
 	PubsubTopic        string
 	PubsubSubscription string

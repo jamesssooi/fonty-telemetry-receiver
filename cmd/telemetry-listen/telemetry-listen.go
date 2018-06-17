@@ -26,7 +26,7 @@ func main() {
 	router.HandleFunc("/v1", endpointV1)
 
 	// Run server
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d", "localhost", 8080), router))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d", "localhost", fontytelemetry.Config.Port), router))
 }
 
 // TelemetryData represents an incoming telemetry event from a fonty client.
