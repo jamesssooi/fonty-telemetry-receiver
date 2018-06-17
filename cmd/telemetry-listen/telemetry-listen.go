@@ -33,7 +33,7 @@ func main() {
 // TelemetryData represents an incoming telemetry event from a fonty client.
 type TelemetryData struct {
 	IPAddress       string          `json:"ip_address"`
-	ServerTimestamp string          `json:"server_timestamp"`
+	ServerTimestamp int64           `json:"server_timestamp"`
 	Timestamp       iso8601.ISO8601 `json:"timestamp"`
 	StatusCode      int             `json:"status_code"`
 	EventType       string          `json:"event_type"`
@@ -55,7 +55,7 @@ func endpointV1(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add server timetamp
-	data.ServerTimestamp = time.Now().UTC().Format(time.RFC3339)
+	data.ServerTimestamp = time.Now().Unix()
 
 	// Add IP address. Needed to process geographic area later, will be removed in
 	// the ETL pipeline before storage.
