@@ -2,5 +2,5 @@
   "Port": 8080,
   "ProjectID": "fonty-analytics",
   "PubsubTopic": "fonty-telemetry",
-  "PubsubSubscription": "fonty-telemetry-elt"
+  "PubsubSubscription": "fonty-telemetry-etl"
 }
